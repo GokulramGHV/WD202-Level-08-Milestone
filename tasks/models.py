@@ -37,7 +37,8 @@ class Task(models.Model):
 
 class EmailSettings(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    email_time = models.DateTimeField(editable=True, default=timezone.now)
+    email_time = models.TimeField(editable=True, default=timezone.now)
+    email_date = models.DateField(default=timezone.now)
     email_enable = models.BooleanField(default=True)
 
 

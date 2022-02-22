@@ -12,7 +12,7 @@ from tasks.models import STATUS_CHOICES, EmailSettings, Task
 @periodic_task(run_every=timedelta(seconds=20))
 def send_email_remainder():
     print("Starting to process email")
-    email_qs = EmailSettings.objects.filter(email_enable=True, email_time__lte=timezone.now())
+    email_qs = EmailSettings.objects.filter(email_enable=True, email_time__lte=timezone.now(), email_date__lte=timezone.now())
     for email in email_qs:
         email_content = "Task Report\nHere's your report for today:\n"
         user = User.objects.get(id=email.user.id)
@@ -21,8 +21,6 @@ def send_email_remainder():
             count = pending_qs.filter(status=status[0]).count()
             email_content += f"{status[0]}: {count}\n"
             
-        email.email_time += timedelta(days=1)
-        email.save()
         send_mail(
             "Task Report (Breakdown based on task status)",
             email_content,
@@ -30,3 +28,6 @@ def send_email_remainder():
             [user.email],
         )
         print("Completed Processing for User", user.username, user.id)
+
+        email.email_date += timedelta(days=1)
+        email.save()
