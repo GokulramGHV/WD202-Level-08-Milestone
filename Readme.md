@@ -1,3 +1,7 @@
+## Screenshots
+![image](https://user-images.githubusercontent.com/40627011/155121866-8a305459-203a-44de-aa86-b577034dd393.png)
+![image](https://user-images.githubusercontent.com/40627011/155121748-41070b7b-e04d-4a7d-87bc-523a0991ed50.png)
+
 In This milestone, you will be extending the functionality of the project we worked in the level.
 
 The specification for this program is as follows,
